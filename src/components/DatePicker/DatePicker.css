@@ -1,0 +1,80 @@
+/*Estilos del calendario*/
+
+.react-calendar {
+    height: 300px;
+    width: 100%;
+    margin-top: 30px;
+    font-family: roboto;
+    margin-bottom: 30px;
+    background-color: white;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+/* Estilos de selectores de días del mes y cabecera*/
+
+.react-calendar__month-view__days>button {
+    background-color: white;
+    border: 0px solid black;
+    margin-top: 7px;
+}
+
+
+.react-calendar__navigation>button {
+    border: 0px solid white;
+    background-color: #FC0400;
+    color: white;
+    font-family: roboto;
+    font-size: 18px;
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+
+.react-calendar__navigation {
+    background-color: #FC0400;
+    color: white;
+    padding-bottom:20px;
+}
+
+.react-calendar__month-view__weekdays__weekday>abbr {
+    text-decoration: none;
+
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+    color: white;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+    margin-top: 20px;
+}
+
+
+/* Efectos de posicionamiento de ratón sobre elementos */
+
+.react-calendar__month-view__days__day:hover {
+    background-color: #FC0400;
+    color: white;
+}
+
+.react-calendar__month-view__days__day:active {
+    background-color: #FC0400;
+    color: white;
+    outline: 0px solid red!important;
+    border: 0px solid white;
+}
+
+.react-calendar__month-view__days__day:focus {
+    background-color: #FC0400;
+    border: 0px solid white;
+    outline: 0px solid red!important;
+    color: white;
+}
+
+.react-calendar__navigation__arrow:focus {
+    outline: 0px solid red!important;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth:hover {
+    background-color: white;
+}
+

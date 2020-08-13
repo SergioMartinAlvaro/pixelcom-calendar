@@ -1,0 +1,85 @@
+.BannerRow {
+    width: 100%;
+    height: 320px;
+    justify-content: center;
+    color: white;
+    font-family: roboto;
+    margin-top: 180px;
+}
+
+.CenteredTitle {
+    font-family: roboto;
+    font-size: 28px;
+}
+
+.BackgroundOpacity {
+    background-color: black;
+    opacity: 0.5;
+    z-index: -9998;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 606px;
+}
+
+.BackgroundBannerImage {
+    height: 606px;
+    width: 100%;
+    z-index: -9999;
+    top:0;
+    position: absolute;
+    left: 0;
+}
+
+.CenteredButton {
+    background-color: #FC0400;
+    color: white;
+    margin-top: 30px;
+    border: 2px solid #FC0400;
+    font-size: 14px;
+    padding: 6px 28px 6px 28px;
+}
+
+@media (min-width: 992px) {
+    .BackgroundBannerImage {
+        height: 680px;
+        width: 100%;
+        z-index: -9999;
+        top:0;
+        position: absolute;
+        left: 0;
+    }
+
+    .BackgroundOpacity {
+        background-color: black;
+        opacity: 0.4;
+        z-index: -9998;
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 680px;
+    }
+
+    .BannerRow {
+        width: 100%;
+        height: 320px;
+        justify-content: center;
+        color: white;
+        font-family: roboto;
+    }
+
+    .CenteredTitle {
+        font-size: 34px;
+    }
+
+    .CenteredButton {
+        background-color: #FC0400;
+        color: white;
+        margin-top: 30px;
+        border: 2px solid #FC0400;
+        font-size: 18px;
+        padding: 8px 32px 8px 32px;
+    }
+}
