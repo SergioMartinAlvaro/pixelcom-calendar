@@ -13,24 +13,16 @@ class DatePicker extends Component {
         }
     }
 
-    getChildDate = (date) => {
-        this.setState({
-            date: date
-        });
-    }
-
     componentWillReceiveProps(nextProps) {
         this.setState({
             date: nextProps.date
         });
-        alert("Hello" + this.state.date)
     }
 
     render() {
         return (
             <div>
-                <ReactCalendar date={this.state.date} getDateFn={this.getChildDate} />
-                <h1>{"Horas disponibles el: " + this.state.date}</h1>
+                <ReactCalendar date={this.state.date} getDateFn={this.props.getChildDate} />
             </div>
         )
 

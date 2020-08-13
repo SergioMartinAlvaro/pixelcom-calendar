@@ -45,3 +45,11 @@ body {
   font-family: roboto;
   src: url("../src/assets/fonts/Roboto-Regular.ttf");
 }
+
+body {
+ background-color: rgba(255,255,255,0)
+}
+
+.container {
+  left: 0;
+}

@@ -14,11 +14,17 @@ class Main extends Component {
         }
     }
 
+    getChildDate = (date) => {
+        this.setState({
+            date: date
+        });
+    }
+
     render() {
         return (
             <div>
-                <DatePicker />
-                <SlotSet />
+                <DatePicker date={this.state.date} getChildDate={this.getChildDate} />
+                <SlotSet date={this.state.date} />
             </div>
         )
 
