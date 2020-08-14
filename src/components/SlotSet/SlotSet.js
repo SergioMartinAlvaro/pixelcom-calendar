@@ -8,7 +8,8 @@ class SlotSet extends Component {
         super(props);
         this.state = {
             date: '',
-            slots: []
+            slots: [],
+            selectedSlots: []
         }
         this.showCar = this.showCar.bind(this);
     }
@@ -43,16 +44,35 @@ class SlotSet extends Component {
         if (image) {
             var isDisplayed = Array.from(image.classList).filter(x => x == "DisplayImage");
             if (isDisplayed.length > 0) {
-              //  e.target.children[1].classList.remove("SetDataSlotOnActive");
+                //  e.target.children[1].classList.remove("SetDataSlotOnActive")
+                var selectedSlot = this.state.selectedSlots.filter(x => x == e.target)
+                if (selectedSlot) {
+                    selectedSlot.map((x, y) => x == e.target ? this.state.selectedSlots.splice(y, 1) : "");
+                }
                 image.classList.remove("DisplayImage");
-                e.target.textContent = "Reservar"
+                e.target.textContent = "Reservar";
+
 
             } else {
-             //   e.target.children[1].classList.add("SetDataSlotOnActive");
+                this.state.selectedSlots.push(e.target);
+                //   e.target.children[1].classList.add("SetDataSlotOnActive");
                 image.classList.add("DisplayImage");
-                e.target.textContent = "Cancelar Reserva"
+                e.target.textContent = "Cancelar Reserva";
             }
+
+            this.showBottomBar();
         }
+    }
+
+    showBottomBar() {
+        if(this.state.selectedSlots.length > 0) {
+            document.getElementById("TransactionActive").classList.remove("ZeroOpacity");
+            document.getElementById("TransactionActive").classList.add("TotalOpacity");
+        } else {
+            document.getElementById("TransactionActive").classList.remove("TotalOpacity");
+            document.getElementById("TransactionActive").classList.add("ZeroOpacity");
+        }
+
     }
 
 
@@ -82,7 +102,7 @@ class SlotSet extends Component {
 
     render() {
         return (
-            <div>
+            <div id="SlotSet">
                 <div className="Meta">
                     <h1>Elige una hora</h1>
                     <div className="MetaMosaic">
@@ -91,11 +111,14 @@ class SlotSet extends Component {
 
                 <div className="container">
                     <div className="row">
-                            {this.state.slots.length != 0 ?
-                                this.writeSlots() : ""
-                            }
-                        </div>
-                    
+                        {this.state.slots.length != 0 ?
+                            this.writeSlots() : ""
+                        }
+                    </div>
+
+                </div>
+                <div className="AcceptTransactionSpace ZeroOpacity" id="TransactionActive">
+                    <button className="AcceptTransactionButton">Confirmar Reserva</button>
                 </div>
             </div>
         )

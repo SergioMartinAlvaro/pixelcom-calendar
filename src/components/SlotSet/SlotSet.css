@@ -20,9 +20,9 @@
 
 .SlotPoint {
     margin-top: 100px;
-    border-left: 6px solid black;
-    border-top: 6px solid black;
-    border-right: 6px solid black;
+    border-left: 4px solid black;
+    border-top: 10px solid black;
+    border-right: 4px solid black;
     opacity: 0.9;
     height: 300px;
     cursor: pointer;
@@ -71,6 +71,35 @@
     border: none;
     background-color: white;
     color: black;
+}
+
+.AcceptTransactionSpace {
+    height: 100px;
+    width: 100%;
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.AcceptTransactionButton {
+    background-color: white;
+    border: none;
+    height: 40px;
+    width: 300px;
+    margin-top: 30px;
+    font-family: roboto;
+}
+
+.ZeroOpacity {
+    transition: opacity 1,5s;
+    opacity: 0;
+}
+
+.TotalOpacity {
+    transition: opacity 1,5s;
+    opacity: 1;
 }
 
 @media (min-width: 1200px) {
