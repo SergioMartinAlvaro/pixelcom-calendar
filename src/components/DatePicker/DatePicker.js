@@ -21,7 +21,7 @@ class DatePicker extends Component {
 
     render() {
         return (
-            <div>
+            <div id="ReactCalendar">
                 <ReactCalendar date={this.state.date} getDateFn={this.props.getChildDate} />
             </div>
         )

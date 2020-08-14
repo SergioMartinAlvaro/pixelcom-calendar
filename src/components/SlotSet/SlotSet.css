@@ -21,23 +21,26 @@
 
 .SlotPoint {
     margin-top: 100px;
-    border-left: 6px solid black;
-    border-top: 6px solid black;
-    border-right: 6px solid black;
-    opacity: 0.9;
+    border-left: 4px solid black;
+    border-top: 10px solid black;
+    border-right: 4px solid black;
+
     height: 300px;
     cursor: pointer;
     
 }
 
+.DataSlot::before {
+    opacity: 0.4;
+}
+
 .CarImage {
     transition: opacity 1.5s;
     opacity: 0;
-    height: 50%;
-    width: 300px;
-    margin-top:  100px;
-    transform: rotate(-90deg);
-    margin-left: -25px;
+    height: 100%;
+    width: 200px;
+    margin-top:  5px;
+    margin-right: -20px;
     z-index: -2;
 }
 
@@ -70,8 +73,44 @@
 
 .RentButton>button {
     border: none;
+    background-color: #FC0400;
+    color: white;
+}
+
+.AcceptTransactionSpace {
+    height: 100px;
+    width: 100%;
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.AcceptTransactionSpaceTransformation {
+    height: 100%!important;
+    transition: height 2s;
+}
+
+.AcceptTransactionButton {
     background-color: white;
-    color: black;
+    border: none;
+    height: 40px;
+    width: 300px;
+    margin-top: 30px;
+    font-family: roboto;
+}
+
+.ZeroOpacity {
+    transition: opacity 1,5s;
+    opacity: 0;
+    display: none;
+}
+
+.TotalOpacity {
+    transition: opacity 1,5s;
+    opacity: 1;
+    display: block;
 }
 
 @media (min-width: 1200px) {

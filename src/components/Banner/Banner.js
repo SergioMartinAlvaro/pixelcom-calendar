@@ -4,6 +4,17 @@ import './Banner.css';
 import backgroundImage from '../../assets/images/banner-back.jpg';
 
 class Banner extends Component {
+
+    constructor(props) {
+        super(props);
+        this.scrollToCalendar = this.scrollToCalendar.bind(this);
+    }
+    
+    scrollToCalendar() {
+        var elmnt = document.getElementById("ReactCalendar");
+        elmnt.scrollIntoView();
+    }
+
     render() {
 
         return (
@@ -13,7 +24,7 @@ class Banner extends Component {
                 </div>
                 <div className="BannerRow">
                     <h1 className="CenteredTitle">Bienvenido al sistema de reservas</h1>
-                    <button className="CenteredButton">Realizar reserva</button>
+                    <button className="CenteredButton" onClick={this.scrollToCalendar}>Realizar reserva</button>
                 </div>
             </section>
         )
