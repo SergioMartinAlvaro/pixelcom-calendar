@@ -11,7 +11,6 @@ class SlotSet extends Component {
             slots: []
         }
         this.showCar = this.showCar.bind(this);
-        this.hideCar = this.hideCar.bind(this);
     }
 
     writeSlots() {
@@ -24,31 +23,33 @@ class SlotSet extends Component {
 
     applySlotsDesign(slot) {
         return (
-            <div>
-                <h1>{slot.startTime}</h1>
-                <h2>{slot.endTime}</h2>
-                <h2>{slot.usersAvailable}</h2>
+            <div className="col-xs-1 col-md-5 col-lg-3 col-sm-5 offset-lg-1 offset-xs-1 offset-md-1 offset-sm-1 SlotPoint">
+                <img className="CarImage" src={carImage} alt="background-kart-image" />
+                <div className="DataSlot">
+                    <p>Inicio: {slot.startTime}</p>
+                    <p>Final: {slot.endTime}</p>
+                    <p>Usuarios: {slot.usersAvailable}</p>
+                    <div className="RentButton" onClick={this.showCar}>
+                        <button>Reservar</button>
+                    </div>
+                </div>
             </div>
         )
     }
 
     showCar(e) {
-        if (e.target.children[0]) {
-            var isDisplayed = Array.from(e.target.children[0].classList).filter(x => x == "DisplayImage");
-            if (isDisplayed.length > 0) {
-                e.target.children[0].classList.remove("DisplayImage")
-            } else {
-                e.target.children[0].classList.add("DisplayImage")
-            }
-        }
-    }
+        var image = e.target.parentElement.parentElement.previousElementSibling;
 
-    hideCar(e) {
-        var isDisplayed = Array.from(e.target.classList).filter(x => x == "DisplayImage");
-        if (isDisplayed.length > 0) {
-            e.target.classList.remove("DisplayImage")
-        } else {
-            e.target.classList.add("DisplayImage")
+        if (image) {
+            var isDisplayed = Array.from(image.classList).filter(x => x == "DisplayImage");
+            if (isDisplayed.length > 0) {
+              //  e.target.children[1].classList.remove("SetDataSlotOnActive");
+                image.classList.remove("DisplayImage")
+
+            } else {
+             //   e.target.children[1].classList.add("SetDataSlotOnActive");
+                image.classList.add("DisplayImage")
+            }
         }
     }
 
@@ -85,43 +86,15 @@ class SlotSet extends Component {
                     <div className="MetaMosaic">
                     </div>
                 </div>
+
                 <div className="container">
                     <div className="row">
-                        <div className="col-xs-1 col-md-5 col-lg-3 col-sm-5 offset-lg-1 offset-xs-1 offset-md-1 offset-sm-1 SlotPoint" onClick={this.showCar}>
-                            <div className="DataSlot" onClick={this.showCar}>
-                                Hora:
-                            </div>
-                            <img className="CarImage" src={carImage} onClick={this.hideCar} alt="background-kart-image" />
-
-                        </div>
-                        <div className="col-xs-5 col-md-5 col-lg-3 col-sm-5 offset-lg-1 offset-xs-1 offset-md-1 offset-sm-1 SlotPoint" onClick={this.showCar}>
-                            <img className="CarImage" src={carImage} onClick={this.hideCar} alt="background-kart-image" />
-                        </div>
-                        <div className="col-xs-5 col-md-5 col-lg-3 col-sm-5 offset-lg-1 offset-xs-1 offset-md-1 offset-sm-1 SlotPoint" onClick={this.showCar}>
-                            <img className="CarImage" src={carImage} onClick={this.hideCar} alt="background-kart-image" />
-                        </div>
-                        <div className="col-xs-5 col-md-5 col-lg-3 col-sm-5 offset-lg-1 offset-xs-1 offset-md-1 offset-sm-1 SlotPoint" onClick={this.showCar}>
-                            <img className="CarImage" src={carImage} onClick={this.hideCar} alt="background-kart-image" />
-                        </div>
-                        <div className="col-xs-5 col-md-5 col-lg-3 col-sm-5 offset-xs-1 offset-lg-1 offset-md-1 offset-sm-1 SlotPoint" onClick={this.showCar}>
-                            <img className="CarImage" src={carImage} onClick={this.hideCar} alt="background-kart-image" />
-                        </div>
-                        <div className="col-xs-5 col-md-5 col-lg-3 col-sm-5 offset-xs-1 offset-lg-1 offset-md-1 offset-sm-1 SlotPoint" onClick={this.showCar}>
-                            <img className="CarImage" src={carImage} onClick={this.hideCar} alt="background-kart-image" />
-                        </div>
-
-                    </div>
-                </div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12 col-lg-12 col-sm-12">
                             {this.state.slots.length != 0 ?
                                 this.writeSlots() : ""
                             }
                         </div>
-                    </div>
+                    
                 </div>
-
             </div>
         )
 

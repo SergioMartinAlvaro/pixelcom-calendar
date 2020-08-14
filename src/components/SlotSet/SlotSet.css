@@ -16,7 +16,7 @@
 .SlotPoint {
     margin-top: 100px;
     border-left: 6px solid black;
-    border-bottom: 6px solid black;
+    border-top: 6px solid black;
     border-right: 6px solid black;
     opacity: 0.9;
     height: 300px;
@@ -25,22 +25,47 @@
 }
 
 .CarImage {
-    display: none;
+    transition: opacity 1.5s;
+    opacity: 0;
     height: 50%;
     width: 300px;
-    margin-top:  50px;
+    margin-top:  100px;
     transform: rotate(-90deg);
     margin-left: -25px;
     z-index: -2;
 }
 
 .DisplayImage {
-    display: block!important;
+    opacity: 1;
+    transition: opacity 1.5s;
 }
 
 .DataSlot {
-    position: absolute;
-    z-index: 12;
+    background-color: black;
+    opacity: 0.8;
+    margin-top: -175px;
+    color: white;
+    height: 135px;
+    padding-top: 15px;
+}
+
+.DataSlot>p {
+    line-height: 10px;
+    opacity: 1;
+}
+
+.SetDataSlotOnActive {
+    background-color: black;
+    z-index: 2!important;
+    position: relative;
+    top: 0!important;
+    margin-top: -150px;
+}
+
+.RentButton>button {
+    border: none;
+    background-color: white;
+    color: black;
 }
 
 @media (min-width: 1200px) {
