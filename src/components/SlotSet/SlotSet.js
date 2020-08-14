@@ -44,11 +44,13 @@ class SlotSet extends Component {
             var isDisplayed = Array.from(image.classList).filter(x => x == "DisplayImage");
             if (isDisplayed.length > 0) {
               //  e.target.children[1].classList.remove("SetDataSlotOnActive");
-                image.classList.remove("DisplayImage")
+                image.classList.remove("DisplayImage");
+                e.target.textContent = "Reservar"
 
             } else {
              //   e.target.children[1].classList.add("SetDataSlotOnActive");
-                image.classList.add("DisplayImage")
+                image.classList.add("DisplayImage");
+                e.target.textContent = "Cancelar Reserva"
             }
         }
     }
