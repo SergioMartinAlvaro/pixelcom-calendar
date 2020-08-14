@@ -13,6 +13,11 @@
     width: 100%;
 }
 
+.Meta>h1 {
+    color: #212529;
+    font-weight: lighter;
+}
+
 .SlotPoint {
     margin-top: 100px;
     border-left: 6px solid black;
