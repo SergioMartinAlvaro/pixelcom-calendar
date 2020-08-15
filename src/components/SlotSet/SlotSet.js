@@ -1,4 +1,4 @@
-import React, { useState, Component, callbackToParent } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.css";
 import './SlotSet.css';
@@ -21,6 +21,75 @@ class SlotSet extends Component {
         this.openModalForm = this.openModalForm.bind(this);
     }
 
+    componentWillMount() {
+        var newDate = new Date();
+        var todayDate = newDate.getFullYear() + "-" + ((newDate.getMonth() * 1) + 1) + "-" + newDate.getDate();
+        this.setState({
+            date: todayDate
+        })
+        this.getSlotsFromAPI({ date: todayDate })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            isFirstLoad: false,
+            date: nextProps.date
+        })
+        this.getSlotsFromAPI(nextProps);
+    }
+
+    /* DOM ACTIONS */
+
+    // Open the form when user clicks in bottom button
+    openModalForm() {
+        var hasClass = Array.from(document.getElementById("TransactionActive")).filter(x => "AcceptTransactionSpaceTransformationSmall");
+        if (hasClass) {
+            document.getElementById("TransactionActive").classList.remove("AcceptTransactionSpaceTransformationSmall")
+        }
+        document.getElementById("TransactionActive").classList.add("AcceptTransactionSpaceTransformation")
+        ReactDOM.render(<TransactionForm openModalForm={this.openModalForm} />, document.getElementById('TransactionActive'));
+    }
+
+    // Scroll to slots when are displayed
+    scrollToRent() {
+        var elmnt = document.getElementById("SlotSet");
+        elmnt.scrollIntoView({ behavior: "smooth" })
+    }
+
+    // Shows and hide bottom bar when slots are selected
+    showBottomBar() {
+        if (this.state.selectedSlots.length > 0) {
+            document.getElementById("TransactionActive").classList.remove("ZeroOpacity");
+            document.getElementById("TransactionActive").classList.add("TotalOpacity");
+        } else {
+            document.getElementById("TransactionActive").classList.remove("TotalOpacity");
+            document.getElementById("TransactionActive").classList.add("ZeroOpacity");
+        }
+    }
+
+    // Shows car image when slot is checked
+    showCar(e) {
+        var image = e.target.parentElement.parentElement.previousElementSibling;
+        if (image) {
+            var isDisplayed = Array.from(image.classList).filter(x => x === "DisplayImage");
+            if (isDisplayed.length > 0) {
+                var selectedSlot = this.state.selectedSlots.filter(x => x === e.target)
+                if (selectedSlot) {
+                    selectedSlot.map((x, y) => x === e.target ? this.state.selectedSlots.splice(y, 1) : "");
+                }
+                image.classList.remove("DisplayImage");
+                e.target.textContent = "Reservar";
+            } else {
+                this.state.selectedSlots.push(e.target);
+                image.classList.add("DisplayImage");
+                e.target.textContent = "Cancelar Reserva";
+            }
+
+            this.showBottomBar();
+        }
+    }
+
+    // Method that execute the appliSlotsDesign method
     writeSlots() {
         return (
             this.state.slots.map(slot =>
@@ -29,10 +98,11 @@ class SlotSet extends Component {
         )
     }
 
+    // Render slots in slotset space when API call is succesful
     applySlotsDesign(slot) {
         return (
             <div className="col-xs-1 col-md-5 col-lg-3 col-sm-5 offset-lg-1 offset-xs-1 offset-md-1 offset-sm-1 SlotPoint">
-                <img className="CarImage" src={carImage} alt="background-kart-image" />
+                <img className="CarImage" src={carImage} alt="background-kart" />
                 <div className="DataSlot">
                     <p className="RedText BolderText"> {slot.startTime.substring(0, slot.startTime.lastIndexOf(":"))} - {slot.endTime.substring(0, slot.endTime.lastIndexOf(":"))}</p>
                     <p className="ThinText">Usuarios: {slot.usersAvailable}</p>
@@ -44,57 +114,7 @@ class SlotSet extends Component {
         )
     }
 
-
-    showCar(e) {
-        var image = e.target.parentElement.parentElement.previousElementSibling;
-
-        if (image) {
-            var isDisplayed = Array.from(image.classList).filter(x => x == "DisplayImage");
-            if (isDisplayed.length > 0) {
-                //  e.target.children[1].classList.remove("SetDataSlotOnActive")
-                var selectedSlot = this.state.selectedSlots.filter(x => x == e.target)
-                if (selectedSlot) {
-                    selectedSlot.map((x, y) => x == e.target ? this.state.selectedSlots.splice(y, 1) : "");
-                }
-                image.classList.remove("DisplayImage");
-                e.target.textContent = "Reservar";
-            } else {
-                this.state.selectedSlots.push(e.target);
-                //   e.target.children[1].classList.add("SetDataSlotOnActive");
-                image.classList.add("DisplayImage");
-                e.target.textContent = "Cancelar Reserva";
-            }
-
-            this.showBottomBar();
-        }
-    }
-
-    showBottomBar() {
-        if (this.state.selectedSlots.length > 0) {
-            document.getElementById("TransactionActive").classList.remove("ZeroOpacity");
-            document.getElementById("TransactionActive").classList.add("TotalOpacity");
-        } else {
-            document.getElementById("TransactionActive").classList.remove("TotalOpacity");
-            document.getElementById("TransactionActive").classList.add("ZeroOpacity");
-        }
-
-    }
-
-    openModalForm() {
-        var hasClass = Array.from(document.getElementById("TransactionActive")).filter(x => "AcceptTransactionSpaceTransformationSmall");
-        if (hasClass) {
-            document.getElementById("TransactionActive").classList.remove("AcceptTransactionSpaceTransformationSmall")
-        }
-        document.getElementById("TransactionActive").classList.add("AcceptTransactionSpaceTransformation")
-        ReactDOM.render(<TransactionForm openModalForm={this.openModalForm} />, document.getElementById('TransactionActive'));
-        // setTimeout(() => {return <TransactionForm />}, 2000)
-    }
-
-    showForm() {
-        return (
-            <TransactionForm openModalForm={this.openModalForm} />
-        )
-    }
+    /* API REQUESTS */
 
     getSlotsFromAPI(nextProps) {
         this.setState({
@@ -128,27 +148,9 @@ class SlotSet extends Component {
             )
     }
 
-    scrollToRent() {
-        var elmnt = document.getElementById("SlotSet");
-        elmnt.scrollIntoView({ behavior: "smooth" })
-    }
 
-    componentWillMount() {
-        var newDate = new Date();
-        var todayDate = newDate.getFullYear() + "-" + ((newDate.getMonth() * 1) + 1) + "-" + newDate.getDate();
-        this.setState({
-            date: todayDate
-        })
-        this.getSlotsFromAPI({ date: todayDate })
-    }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            isFirstLoad: false,
-            date: nextProps.date
-        })
-        this.getSlotsFromAPI(nextProps);
-    }
+
 
     render() {
         return (
@@ -162,7 +164,7 @@ class SlotSet extends Component {
 
                 <div className="container">
                     <div className="row">
-                        {this.state.slots.length != 0 ?
+                        {this.state.slots.length !== 0 ?
                             this.writeSlots() : ""
                         }
                     </div>

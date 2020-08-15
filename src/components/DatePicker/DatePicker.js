@@ -1,11 +1,14 @@
-import React, { useState, Component, callbackToParent } from 'react';
-import { render } from 'react-dom';
-import Calendar from 'react-calendar';
+import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import './DatePicker.css';
 import ReactCalendar from './ReactCalendar/ReactCalendar';
 
+/* This component displays the Calendar view including Calendar and a short text */
+
 class DatePicker extends Component {
+
+    /* CONSTRUCTOR */
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -13,20 +16,18 @@ class DatePicker extends Component {
         }
     }
 
+    /* HOOK FUNCTIONS */
+
+    // Update state.date variable when component receive a new prop
     componentWillReceiveProps(nextProps) {
         this.setState({
             date: nextProps.date
         });
     }
 
+    // Update component when it changes
     shouldComponentUpdate() {
         return true;
-    }
-
-    componentWillMount() {
-        this.setState({
-            date: "2020-08-12"
-        })
     }
 
     render() {

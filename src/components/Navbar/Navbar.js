@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import logo from "../../assets/images/logo.png";
 import './Navbar.css';
-//import logo from '../../assets/images/logo.png.png';
+
+/* This component contains the navbar of the application */
 
 class Navbar extends Component {
     render() {

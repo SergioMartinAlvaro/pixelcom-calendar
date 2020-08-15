@@ -1,10 +1,9 @@
-import React, { useState, Component, callbackToParent } from 'react';
-import { render } from 'react-dom';
-import Calendar from 'react-calendar';
+import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import DatePicker from '../DatePicker/DatePicker';
 import SlotSet from '../SlotSet/SlotSet';
 
+/* This component contains DatePicker and SlotSet to make a unique view */
 
 class Main extends Component {
     constructor(props) {
@@ -13,6 +12,8 @@ class Main extends Component {
             date: ''
         }
     }
+
+    /* Receives the date from child component to pass it to SlotSet Component */
 
     getChildDate = (date) => {
         this.setState({

@@ -1,10 +1,13 @@
-import React, { useState, Component, callbackToParent } from 'react';
-import { render } from 'react-dom';
+import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import "bootstrap/dist/css/bootstrap.css";
 import './ReactCalendar.css';
 
+/* Component that displays a Calendar */
+
 const ReactCalendar = (props) => {
+
+    // On date change sets the new date to component state
     const [date, setDate] = useState(new Date());
     const onChange = date => {
         props.getDateFn(date.getFullYear() + "-" + ((date.getMonth()*1) + 1) + "-" + date.getDate());

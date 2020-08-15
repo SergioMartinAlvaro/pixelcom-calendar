@@ -8,10 +8,6 @@
     width: 100%;
 }
 
-.TransactionActive {
-    
-}
-
 .TransactionAlert {
     position: absolute;
     z-index: 30;

@@ -1,9 +1,13 @@
-import React, { useState, Component, callbackToParent } from 'react';
+import React from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import './SuccessAlert.css';
 
+/* This message shows an alert if occurs a succesful action, it has a message property passed
+as parameter */
+
 const SuccessAlert = (props) => {
 
+    // Hide alert message on action 
     const hideAlert = () => {
         document.getElementById("TransactionAlert").hidden = "true"
     }

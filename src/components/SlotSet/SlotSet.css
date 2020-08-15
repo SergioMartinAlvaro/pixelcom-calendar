@@ -1,3 +1,6 @@
+
+/* Start line Classes*/
+
 .MetaMosaic {
     margin-top: 50px;
     height: 100px;
@@ -18,6 +21,8 @@
     font-weight: lighter;
     font-family: roboto;
 }
+
+/* SlotSets Classes*/
 
 .SlotPoint {
     margin-top: 100px;
@@ -47,6 +52,8 @@
     opacity: 1;
     transition: opacity 1.5s;
 }
+
+/* Data inside slots classes*/
 
 .DataSlot {
     background-color: black;
@@ -86,15 +93,7 @@
     opacity: 0.8;
 }
 
-.ThinText {
-    font-weight: lighter;
-    font-family: roboto;
-}
-
-.BolderText {
-    font-weight: bolder;
-    font-family: roboto;
-}
+/* Bottom button classes*/
 
 .AcceptTransactionSpaceTransformation {
     height: 100%!important;
@@ -115,6 +114,8 @@
     font-family: roboto;
 }
 
+/* Generic Classes */
+
 .ZeroOpacity {
     transition: opacity 1,5s;
     opacity: 0;
@@ -126,6 +127,17 @@
     opacity: 1;
     display: block;
 }
+
+.ThinText {
+    font-weight: lighter;
+    font-family: roboto;
+}
+
+.BolderText {
+    font-weight: bolder;
+    font-family: roboto;
+}
+
 
 @media (min-width: 1200px) {
     .CarImage {

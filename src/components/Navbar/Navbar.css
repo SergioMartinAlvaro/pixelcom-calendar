@@ -20,12 +20,9 @@
     }
     
     .navbar {
-        background-color: black!important;
-    }
-    
-    .navbar {
         text-align: left;
         justify-content: left;
+        background-color: black!important;
         height: 180px;
         border-bottom: 2px solid white;
     }

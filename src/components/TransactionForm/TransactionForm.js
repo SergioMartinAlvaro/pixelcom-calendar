@@ -1,4 +1,4 @@
-import React, { useState, Component, callbackToParent } from 'react';
+import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import './TransactionForm.css';
 import imageForm from '../../assets/images/Winner.jpg';
@@ -21,28 +21,19 @@ class TransactionForm extends Component {
         this.closeModalForm = this.closeModalForm.bind(this);
     }
 
-    closeModalForm = () => {
-        // setTimeout(() => {return <TransactionForm />}, 2000)
-        ReactDOM.unmountComponentAtNode(document.getElementById("TransactionActive"));
-        document.getElementById("TransactionActive").classList.remove("AcceptTransactionSpaceTransformation");
-        document.getElementById("TransactionActive").classList.add("AcceptTransactionSpaceTransformationSmall");
-        var node = document.createElement("button");
-        var textnode = document.createTextNode("Confirmar Reserva");
-        node.appendChild(textnode);
-        node.onclick = this.props.openModalForm;
-        node.className = "AcceptTransactionButton";
-        setTimeout(() => {
-            document.getElementById("TransactionActive").appendChild(node)
-        }, 2100)
-
-
+    /* HOOK METHODS */
+    shouldComponentUpdate() {
+        return true;
     }
 
+    /* FUNCTIONAL METHODS */
+
+    // Sets name of sender when form changes
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-
+    // When user submits the form sends an email to web owner with information about reservation
     handleSubmit = (e) => {
         e.preventDefault();
         emailjs
@@ -74,8 +65,21 @@ class TransactionForm extends Component {
         })
     }
 
-    shouldComponentUpdate() {
-        return true;
+    /* DOM METHODS */
+
+    // Closes the modal form and gets back to SlotSet Component
+    closeModalForm = () => {
+        ReactDOM.unmountComponentAtNode(document.getElementById("TransactionActive"));
+        document.getElementById("TransactionActive").classList.remove("AcceptTransactionSpaceTransformation");
+        document.getElementById("TransactionActive").classList.add("AcceptTransactionSpaceTransformationSmall");
+        var node = document.createElement("button");
+        var textnode = document.createTextNode("Confirmar Reserva");
+        node.appendChild(textnode);
+        node.onclick = this.props.openModalForm;
+        node.className = "AcceptTransactionButton";
+        setTimeout(() => {
+            document.getElementById("TransactionActive").appendChild(node)
+        }, 2100)
     }
 
     render() {
@@ -104,12 +108,9 @@ class TransactionForm extends Component {
                     </div>
                 </div>
                 <div className="GradientImage"></div>
-                <img src={imageForm} alt="winner-image" className="FormBannerImage" />
-
+                <img src={imageForm} alt="winner" className="FormBannerImage" />
             </div>
         )
-
-
     }
 }
 
