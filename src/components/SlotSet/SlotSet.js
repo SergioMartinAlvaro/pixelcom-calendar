@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.css";
 import './SlotSet.css';
-//import carImage from '../../assets/images/redcar.jfif';
 import carImage from '../../assets/images/cocheMetaJPG.JPG';
 import Spinner from '../Generics/Spinner/Spinner';
+import ErrorAlert from '../Generics/Alerts/ErrorAlert';
 import TransactionForm from '../TransactionForm/TransactionForm';
 
 class SlotSet extends Component {
@@ -15,7 +15,8 @@ class SlotSet extends Component {
             slots: [],
             selectedSlots: [],
             isFirstLoad: true,
-            isLoading: false
+            isLoading: false,
+            emptyResponse: false
         }
         this.showCar = this.showCar.bind(this);
         this.openModalForm = this.openModalForm.bind(this);
@@ -78,11 +79,11 @@ class SlotSet extends Component {
                     selectedSlot.map((x, y) => x === e.target ? this.state.selectedSlots.splice(y, 1) : "");
                 }
                 image.classList.remove("DisplayImage");
-                e.target.textContent = "Reservar";
+                e.target.textContent = "Seleccionar";
             } else {
                 this.state.selectedSlots.push(e.target);
                 image.classList.add("DisplayImage");
-                e.target.textContent = "Cancelar Reserva";
+                e.target.textContent = "Cancelar Selección";
             }
 
             this.showBottomBar();
@@ -107,7 +108,7 @@ class SlotSet extends Component {
                     <p className="RedText BolderText"> {slot.startTime.substring(0, slot.startTime.lastIndexOf(":"))} - {slot.endTime.substring(0, slot.endTime.lastIndexOf(":"))}</p>
                     <p className="ThinText">Usuarios: {slot.usersAvailable}</p>
                     <div className="RentButton" onClick={this.showCar}>
-                        <button>Reservar</button>
+                        <button>Seleccionar</button>
                     </div>
                 </div>
             </div>
@@ -134,10 +135,20 @@ class SlotSet extends Component {
                         slots: result.data,
                         isLoading: false
                     });
-                    this.state.slots.map(x => console.log(x));
-                    if (!this.state.isFirstLoad) {
-                        this.scrollToRent();
+                    if (result.data.length === 0) {
+                        this.setState({
+                            emptyResponse: true
+                        })
+                    } else {
+                        this.setState({
+                            emptyResponse: false
+                        })
+                        this.state.slots.map(x => console.log(x));
+                        if (!this.state.isFirstLoad) {
+                            this.scrollToRent();
+                        }
                     }
+
                 },
                 (error) => {
                     this.setState({
@@ -157,7 +168,9 @@ class SlotSet extends Component {
             <div id="SlotSet">
                 {this.state.isLoading ? <Spinner /> : ""}
                 <div className="Meta">
-                    <h1 className="ThinText">Elige una hora para el día <span className="RedText BolderText">{this.state.date}</span></h1>
+                   {this.state.emptyResponse ? 
+                   <h1 className="ThinText">No existen horas para el día <span className="RedText BolderText">{this.state.date}</span></h1>:
+                    <h1 className="ThinText"> Elige una hora para el día <span className="RedText BolderText">{this.state.date}</span></h1>} 
                     <div className="MetaMosaic">
                     </div>
                 </div>

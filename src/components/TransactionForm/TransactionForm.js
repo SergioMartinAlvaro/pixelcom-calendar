@@ -5,6 +5,7 @@ import imageForm from '../../assets/images/Winner.jpg';
 import * as emailjs from 'emailjs-com';
 import SuccessAlert from '../Generics/Alerts/SuccessAlert';
 import ReactDOM from 'react-dom';
+import ErrorAlert from '../Generics/Alerts/ErrorAlert';
 
 class TransactionForm extends Component {
     constructor(props) {
@@ -13,12 +14,15 @@ class TransactionForm extends Component {
             hasValues: 0,
             email: "",
             message: "Ya tenemos registrada tu reserva ¡Nos vemos en el asfalto!",
-            sentOk: false
+            errorMessage: "Ocurrió un error al registrar la reserva, ¡lo arreglaremos lo antes posible!",
+            sentOk: true,
+            openAlert: false
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.closeModalForm = this.closeModalForm.bind(this);
+        this.closeEmptyMessage = this.closeEmptyMessage.bind(this);
     }
 
     /* HOOK METHODS */
@@ -47,22 +51,24 @@ class TransactionForm extends Component {
                 this.setState({
                     email: "",
                     hasValues: 0,
-                    sentOK: true
+                    sentOK: true,
+                    openAlert: true
                 })
             )
             .catch(
                 this.setState({
                     email: "",
                     hasValues: 0,
-                    sentOK: false
+                    sentOK: false,
+                    openAlert: true
                 })
             );
-
+/*
         this.setState({
             email: "",
             hasValues: 0,
             sentOK: true
-        })
+        })*/
     }
 
     /* DOM METHODS */
@@ -82,14 +88,27 @@ class TransactionForm extends Component {
         }, 2100)
     }
 
+    closeEmptyMessage = () => {
+        this.setState({
+            openAlert: false
+        })
+    }
+
     render() {
         return (
             <div id="TransactionModalForm">
+
                 <div className="container" id="TransactionFormContainer">
                     <div className="row">
-                        <div className="col-md-6 col-lg-6 col-sm-10 col-xs-10 offset-md-3 offset-lg-3 offset-sm-1 offset-xs-1">
-                            {this.state.sentOK ? <SuccessAlert message={this.state.message} /> : ""}
-                        </div>
+                        {this.state.openAlert ? this.state.sentOk ?
+                            <div className="col-md-6 col-lg-6 col-sm-10 col-xs-10 offset-md-3 offset-lg-3 offset-sm-1 offset-xs-1">
+                                <SuccessAlert message={this.state.message} closeEmptyMessage={this.closeEmptyMessage} />
+                            </div>
+                            :
+                            <div className="col-md-6 col-lg-6 col-sm-10 col-xs-10 offset-md-3 offset-lg-3 offset-sm-1 offset-xs-1">
+                                <ErrorAlert message={this.state.errorMessage} closeEmptyMessage={this.closeEmptyMessage} />
+                            </div>
+                            : ""}
                         <div className="col-md-6 col-lg-6 col-sm-10 col-xs-10 offset-md-3 offset-lg-3 offset-sm-1 offset-xs-1">
                             <h1 className="ThinText">¡Encendemos <span className="RedText BoldText">motores</span>, ya casi está listo!</h1>
                             <form onSubmit={this.handleSubmit.bind(this)} id="TransactionForm" className="TransactionForm">
