@@ -12,6 +12,33 @@
     
 }
 
+.TransactionAlert {
+    position: absolute;
+    z-index: 30;
+    margin-top: -80px;
+}
+
+.BtnSubmit {
+    background-color: #FC0400;
+    color: white;
+    border:none;
+    width: 200px;
+    border-radius: 0;
+    margin-top: 40px;
+}
+
+.TransactionForm>.form-group {
+    margin-top: 40px;
+}
+.TransactionForm>.form-group>input {
+    margin-top: 10px;
+}
+
+.TransactionForm>p {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 .GradientImage {
     height: 100%;
     z-index: 2;

@@ -1,0 +1,6 @@
+.TransactionAlert {
+
+    position: absolute;
+    z-index: 30;
+    margin-top: -80px;
+}

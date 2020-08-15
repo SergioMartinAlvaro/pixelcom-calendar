@@ -26,7 +26,6 @@
     border-right: 4px solid black;
 
     height: 300px;
-    cursor: pointer;
     
 }
 
@@ -89,6 +88,11 @@
 
 .AcceptTransactionSpaceTransformation {
     height: 100%!important;
+    transition: height 2s;
+}
+
+.AcceptTransactionSpaceTransformationSmall {
+    height: 100px!important;
     transition: height 2s;
 }
 

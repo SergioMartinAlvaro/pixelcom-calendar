@@ -15,6 +15,7 @@ class SlotSet extends Component {
             selectedSlots: []
         }
         this.showCar = this.showCar.bind(this);
+        this.openModalForm = this.openModalForm.bind(this);
     }
 
     writeSlots() {
@@ -30,7 +31,7 @@ class SlotSet extends Component {
             <div className="col-xs-1 col-md-5 col-lg-3 col-sm-5 offset-lg-1 offset-xs-1 offset-md-1 offset-sm-1 SlotPoint">
                 <img className="CarImage" src={carImage} alt="background-kart-image" />
                 <div className="DataSlot">
-                    <p> {slot.startTime.substring(0,slot.startTime.lastIndexOf(":"))} - {slot.endTime.substring(0,slot.endTime.lastIndexOf(":"))}</p>
+                    <p> {slot.startTime.substring(0, slot.startTime.lastIndexOf(":"))} - {slot.endTime.substring(0, slot.endTime.lastIndexOf(":"))}</p>
                     <p>Usuarios: {slot.usersAvailable}</p>
                     <div className="RentButton" onClick={this.showCar}>
                         <button>Reservar</button>
@@ -67,7 +68,7 @@ class SlotSet extends Component {
     }
 
     showBottomBar() {
-        if(this.state.selectedSlots.length > 0) {
+        if (this.state.selectedSlots.length > 0) {
             document.getElementById("TransactionActive").classList.remove("ZeroOpacity");
             document.getElementById("TransactionActive").classList.add("TotalOpacity");
         } else {
@@ -78,14 +79,18 @@ class SlotSet extends Component {
     }
 
     openModalForm() {
+        var hasClass = Array.from(document.getElementById("TransactionActive")).filter(x => "AcceptTransactionSpaceTransformationSmall");   
+        if (hasClass) {
+            document.getElementById("TransactionActive").classList.remove("AcceptTransactionSpaceTransformationSmall")
+        }
         document.getElementById("TransactionActive").classList.add("AcceptTransactionSpaceTransformation")
-        ReactDOM.render(<TransactionForm />, document.getElementById('TransactionActive'));
-       // setTimeout(() => {return <TransactionForm />}, 2000)
+        ReactDOM.render(<TransactionForm openModalForm={this.openModalForm}/>, document.getElementById('TransactionActive'));
+        // setTimeout(() => {return <TransactionForm />}, 2000)
     }
 
     showForm() {
-        return(
-            <TransactionForm />
+        return (
+            <TransactionForm openModalForm={this.openModalForm} />
         )
     }
 
