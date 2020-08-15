@@ -50,7 +50,7 @@
 
 .DataSlot {
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.9;
     margin-top: -175px;
     color: white;
     height: 135px;
@@ -84,6 +84,16 @@
     bottom: 0;
     justify-content: center;
     opacity: 0.8;
+}
+
+.ThinText {
+    font-weight: lighter;
+    font-family: roboto;
+}
+
+.BolderText {
+    font-weight: bolder;
+    font-family: roboto;
 }
 
 .AcceptTransactionSpaceTransformation {

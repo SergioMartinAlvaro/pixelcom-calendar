@@ -19,6 +19,16 @@ class DatePicker extends Component {
         });
     }
 
+    shouldComponentUpdate() {
+        return true;
+    }
+
+    componentWillMount() {
+        this.setState({
+            date: "2020-08-12"
+        })
+    }
+
     render() {
         return (
             <div id="ReactCalendar">

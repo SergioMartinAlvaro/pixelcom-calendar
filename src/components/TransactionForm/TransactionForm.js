@@ -12,7 +12,7 @@ class TransactionForm extends Component {
         this.state = {
             hasValues: 0,
             email: "",
-            message: "Se ha registrado su petición correctamente, ¡nos vemos sobre el asfalto!",
+            message: "Ya tenemos registrada tu reserva ¡Nos vemos en el asfalto!",
             sentOk: false
         }
 
@@ -22,17 +22,20 @@ class TransactionForm extends Component {
     }
 
     closeModalForm = () => {
-       // setTimeout(() => {return <TransactionForm />}, 2000)
-       ReactDOM.unmountComponentAtNode(document.getElementById("TransactionActive"));
-       document.getElementById("TransactionActive").classList.remove("AcceptTransactionSpaceTransformation");
-       document.getElementById("TransactionActive").classList.add("AcceptTransactionSpaceTransformationSmall");
-       var node = document.createElement("button");
-       var textnode = document.createTextNode("Confirmar Reserva");
-       node.appendChild(textnode);
-       node.onclick = this.props.openModalForm;
-       node.className = "AcceptTransactionButton";
-       document.getElementById("TransactionActive").appendChild(node);
-       
+        // setTimeout(() => {return <TransactionForm />}, 2000)
+        ReactDOM.unmountComponentAtNode(document.getElementById("TransactionActive"));
+        document.getElementById("TransactionActive").classList.remove("AcceptTransactionSpaceTransformation");
+        document.getElementById("TransactionActive").classList.add("AcceptTransactionSpaceTransformationSmall");
+        var node = document.createElement("button");
+        var textnode = document.createTextNode("Confirmar Reserva");
+        node.appendChild(textnode);
+        node.onclick = this.props.openModalForm;
+        node.className = "AcceptTransactionButton";
+        setTimeout(() => {
+            document.getElementById("TransactionActive").appendChild(node)
+        }, 2100)
+
+
     }
 
     handleChange = (e) => {
@@ -64,15 +67,14 @@ class TransactionForm extends Component {
                 })
             );
 
-            this.setState({
-                email: "",
-                hasValues: 0,
-                sentOK: true
-            })
+        this.setState({
+            email: "",
+            hasValues: 0,
+            sentOK: true
+        })
     }
-    
+
     shouldComponentUpdate() {
-        alert(this.state.sentOK)
         return true;
     }
 
@@ -93,7 +95,7 @@ class TransactionForm extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label for="exampleInputPassword1">¿Algo que quieras contarnos?</label>
-                                    <input type="password" onChange={this.showAlert} className="form-control" id="exampleInputPassword1" placeholder="Queremos champán en la meta, fuegos artificiales..." />
+                                    <input type="text" onChange={this.showAlert} className="form-control" id="exampleInputPassword1" placeholder="Queremos champán en la meta, fuegos artificiales..." />
                                 </div>
                                 <button type="submit" className="btn btn-primary BtnSubmit">Confirmar</button>
                                 <p onClick={this.closeModalForm}>Cancelar</p>

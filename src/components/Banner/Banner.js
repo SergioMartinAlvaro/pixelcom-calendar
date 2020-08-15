@@ -12,7 +12,7 @@ class Banner extends Component {
     
     scrollToCalendar() {
         var elmnt = document.getElementById("ReactCalendar");
-        elmnt.scrollIntoView();
+        elmnt.scrollIntoView({behavior: "smooth"});
     }
 
     render() {
@@ -23,7 +23,7 @@ class Banner extends Component {
                 <div className="BackgroundOpacity">
                 </div>
                 <div className="BannerRow">
-                    <h1 className="CenteredTitle">Bienvenido al sistema de reservas</h1>
+                    <h1 className="CenteredTitle ThinText">Bienvenido al sistema de reservas</h1>
                     <button className="CenteredButton" onClick={this.scrollToCalendar}>Realizar reserva</button>
                 </div>
             </section>

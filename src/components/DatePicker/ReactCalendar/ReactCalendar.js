@@ -9,15 +9,13 @@ const ReactCalendar = (props) => {
     const onChange = date => {
         props.getDateFn(date.getFullYear() + "-" + ((date.getMonth()*1) + 1) + "-" + date.getDate());
         setDate(date);
-        var elmnt = document.getElementById("SlotSet");
-        elmnt.scrollIntoView();
     }
 
     return <div>
         <div class="container">
             <div class="row" style={{ justifyContent: "left" }}>
                 <div class="col-md-6 col-lg-5 col-sm-12">
-                    <Calendar onClickDay={onChange} value={date} />
+                    <Calendar onClickDay={onChange} defaultValue={"2020-08-12"} value={date} />
                 </div>
                 {date.get}
                 <div className="TopSeparation LeftSeparation col-md-5 col-lg-6 col-sm-12">
