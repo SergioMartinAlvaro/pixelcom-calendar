@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import './SlotSet.css';
 import carImage from '../../assets/images/cocheMetaJPG.JPG';
 import Spinner from '../Generics/Spinner/Spinner';
-import ErrorAlert from '../Generics/Alerts/ErrorAlert';
 import TransactionForm from '../TransactionForm/TransactionForm';
 
 class SlotSet extends Component {

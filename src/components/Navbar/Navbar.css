@@ -14,6 +14,11 @@
     font-size: 14px;
 }
 
+.NavButton {
+    background-color: transparent;
+    border: none;
+}
+
 @media (min-width: 992px) {
     .Navbar {
         background-color: black!important;
