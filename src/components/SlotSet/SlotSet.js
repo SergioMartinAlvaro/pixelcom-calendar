@@ -58,6 +58,7 @@ class SlotSet extends Component {
 
     // Shows and hide bottom bar when slots are selected
     showBottomBar() {
+
         if (this.state.selectedSlots.length > 0) {
             document.getElementById("TransactionActive").classList.remove("ZeroOpacity");
             document.getElementById("TransactionActive").classList.add("TotalOpacity");
@@ -73,9 +74,15 @@ class SlotSet extends Component {
         if (image) {
             var isDisplayed = Array.from(image.classList).filter(x => x === "DisplayImage");
             if (isDisplayed.length > 0) {
-                var selectedSlot = this.state.selectedSlots.filter(x => x === e.target)
-                if (selectedSlot) {
-                    selectedSlot.map((x, y) => x === e.target ? this.state.selectedSlots.splice(y, 1) : "");
+                if (isDisplayed.length === 1) {
+                    this.state.selectedSlots.pop();
+                } else {
+                    var selectedSlot = this.state.selectedSlots.filter(x => x === e.target)
+                    if (selectedSlot) {
+                        selectedSlot.map((x, y) => x === e.target ? this.state.selectedSlots.splice(y, 1) : "");
+                        image.classList.remove("DisplayImage");
+                        e.target.textContent = "Seleccionar";
+                    }
                 }
                 image.classList.remove("DisplayImage");
                 e.target.textContent = "Seleccionar";
@@ -166,9 +173,9 @@ class SlotSet extends Component {
             <div id="SlotSet">
                 {this.state.isLoading ? <Spinner /> : ""}
                 <div className="Meta">
-                   {this.state.emptyResponse ? 
-                   <h1 className="ThinText">No existen horas para el día <span className="RedText BolderText">{this.state.date}</span></h1>:
-                    <h1 className="ThinText"> Elige una hora para el día <span className="RedText BolderText">{this.state.date}</span></h1>} 
+                    {this.state.emptyResponse ?
+                        <h1 className="ThinText">No existen horas para el día <span className="RedText BolderText">{this.state.date}</span></h1> :
+                        <h1 className="ThinText"> Elige una hora para el día <span className="RedText BolderText">{this.state.date}</span></h1>}
                     <div className="MetaMosaic">
                     </div>
                 </div>
